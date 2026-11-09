@@ -5,8 +5,10 @@ const PARTS=['Набор и оформление Word','Слияние доку�
 const GUIDE_IDS=['word','merge','powerpoint','slider'];
 const defaultData=()=>({groups:[{id:'oi205',name:'ОИ-205',students:[]},{id:'oi206',name:'ОИ-206',students:[]}],assigned:{oi205:[],oi206:[]},marks:{},custom:{}});
 function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.groups)&&x.assigned&&x.marks)return x}catch(e){}return defaultData()}
-let db=load(), view='catalog', selectedVariant=null, selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
+const VIEWS=new Set(['catalog','journal','analytics','settings']);
+let db=load(), view=readView(), selectedVariant=null, selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
 const app=document.getElementById('app');
+const header=document.querySelector('[data-site-header]');
 function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){alert('Не удалось сохранить данные. Экспортируйте резервную копию.') }}
 const $=(id)=>document.getElementById(id); const escape=(s)=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const currentGroup=()=>db.groups.find(g=>g.id===selectedGroup)||db.groups[0];
@@ -18,10 +20,31 @@ function score(st){let vars=groupAssignments(),total=vars.reduce((a,n)=>a+(byNum
   const p=total?Math.round(done/total*100):null;return {total,done,percent:p,grade:grade(p),complete,variants:vars.length};}
 function groupStats(){let g=currentGroup(),students=g?.students||[];let ss=students.map(score),valid=ss.filter(s=>s.percent!=null);let avg=valid.length?Math.round(valid.reduce((a,s)=>a+s.percent,0)/valid.length):null;return{count:students.length,avg,assigned:groupAssignments().length,done:valid.reduce((a,s)=>a+s.complete,0), grades:[2,3,4,5].map(n=>valid.filter(s=>s.grade===n).length)} }
 function gPill(grade){return grade?`<span class="grade-pill g${grade}">${grade}</span>`:'<span class="grade-pill">—</span>'}
-function nav(name,label,glyph){return `<button data-nav="${name}" class="${view===name?'active':''}"><span class="glyph">${glyph}</span>${label}</button>`}
-function shell(main){app.innerHTML=`<div class="shell"><aside class="sidebar"><div class="brand"><div class="brand-icon">ДЭ</div><div>Практика ДЭ<small>09.01.03 · КИМ 2027</small></div></div><div><div class="side-label">Навигация</div><nav class="nav">${nav('catalog','Варианты','▦')}<a class="nav-link" href="methodichki/"><span class="glyph" aria-hidden="true">▧</span>Методички</a>${nav('journal','Журнал','▤')}${nav('analytics','Аналитика','◫')}${nav('settings','Настройки','⚙')}</nav></div><div class="side-foot">48 учебных вариантов.<br>Прогресс хранится только в браузере преподавателя.</div></aside><main class="main">${main}</main></div>`;app.querySelectorAll('[data-nav]').forEach(b=>b.addEventListener('click',()=>{view=b.dataset.nav;selectedVariant=null;render()}))}
+function readView() {
+  const section=location.hash.slice(1);
+  return VIEWS.has(section) ? section : 'catalog';
+}
+function showSection() {
+  view=readView();
+  selectedVariant=null;
+  render();
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',showSection);
+header.addEventListener('click',event=>{
+  const link=event.target.closest('[data-nav],[data-home]');
+  if(link && link.hash===location.hash && link.hash && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) showSection();
+});
 function pageHeader(label,title,sub,actions=''){return `<div class="page-top"><div><div class="eyebrow">${label}</div><h1 class="h1">${title}</h1>${sub?`<p class="subtitle">${sub}</p>`:''}</div>${actions?`<div class="row wrap">${actions}</div>`:''}</div>`}
-function render(){document.title=(selectedVariant&&view==='catalog'?'Вариант '+selectedVariant+' · ':'')+'Практика ДЭ · журнал';if(view==='catalog')renderCatalog();else if(view==='journal')renderJournal();else if(view==='analytics')renderAnalytics();else renderSettings()}
+function render() {
+  header.querySelector('[aria-current]')?.removeAttribute('aria-current');
+  header.querySelector('[data-nav="'+view+'"]').setAttribute('aria-current','page');
+  document.title=(selectedVariant&&view==='catalog'?'Вариант '+selectedVariant+' · ':'')+'Практика ДЭ · журнал';
+  if(view==='catalog')renderCatalog();
+  else if(view==='journal')renderJournal();
+  else if(view==='analytics')renderAnalytics();
+  else renderSettings();
+}
 
 /* Варианты 39–48. Шаблон слияния повторяет макет «Образец Слияние_ОЗ.pdf».
    Журнал и списки студентов не изменяются. */
@@ -65,7 +88,7 @@ function kimMailPreview(html,variantNumber){
 }
 
 function renderCatalog(){if(selectedVariant){const d=byNum.get(selectedVariant);let html=pageHeader('Каталог / Вариант '+d.number,`Вариант №${d.number}`,escape(d.title),`<button class="btn" id="printV">⎙ Печать / PDF</button><button class="btn primary" id="backV">Все варианты</button>`);
- html+=`<div class="panel-grid"><article class="card"><div class="task-meta"><span class="chip">${d.parts} ${d.parts===1?'часть':d.parts<5?'части':'частей'}</span>${d.generated?'<span class="chip muted">Дополнительный учебный вариант</span>':''}</div><div class="task-content">${kimMailPreview(d.html,d.number)}</div></article><aside class="variant-guides"><div class="side-panel"><b>Методички к варианту</b><p>${Array.from({length:d.parts},(_,i)=>`${i+1}. <a href="methodichki/#${GUIDE_IDS[i]}">${escape(PARTS[i])}</a>`).join('<br>')}</p><p>Сохраните выполненные файлы в папку с нужным именем. Если показатели в тренажёре отличаются от КИМ на экзамене, приоритет имеет выданное задание.</p></div></aside></div>`;shell(html);$('backV').onclick=()=>{selectedVariant=null;render()};$('printV').onclick=()=>window.print();return}
+ html+=`<div class="panel-grid"><article class="card"><div class="task-meta"><span class="chip">${d.parts} ${d.parts===1?'часть':d.parts<5?'части':'частей'}</span>${d.generated?'<span class="chip muted">Дополнительный учебный вариант</span>':''}</div><div class="task-content">${kimMailPreview(d.html,d.number)}</div></article><aside class="variant-guides"><div class="side-panel"><b>Методички к варианту</b><p>${Array.from({length:d.parts},(_,i)=>`${i+1}. <a href="methodichki/#${GUIDE_IDS[i]}">${escape(PARTS[i])}</a>`).join('<br>')}</p><p>Сохраните выполненные файлы в папку с нужным именем. Если показатели в тренажёре отличаются от КИМ на экзамене, приоритет имеет выданное задание.</p></div></aside></div>`;app.innerHTML=html;$('backV').onclick=()=>{selectedVariant=null;render()};$('printV').onclick=()=>window.print();return}
  const visible=V.filter(v=>{let f=filter==='all'||(filter==='word'&&v.parts===1)||(filter==='merge'&&v.parts===2)||(filter==='ppt'&&v.parts===3)||(filter==='slider'&&v.parts===4);return f&&(!search||String(v.number).includes(search)||v.title.toLowerCase().includes(search.toLowerCase()))});
  let out=pageHeader('Библиотека заданий','Каталог вариантов','Подборка учебных работ №1–48 с постепенным расширением навыков: Word, рассылка, презентации и мобильный слайдер.');
  out+=`<section class="card hero"><div><div class="eyebrow" style="color:#a2c9bb">Подготовка к демонстрационному экзамену</div><h2>От первого документа<br>до комплексного задания</h2><p>Изучайте варианты, а выполнение отмечайте в преподавательском журнале. Все задания доступны для просмотра и печати.</p></div><div class="number">48</div></section>`;
@@ -74,7 +97,7 @@ function renderCatalog(){if(selectedVariant){const d=byNum.get(selectedVariant);
  out+=visible.map(v=>`<button class="variant-card" data-open="${v.number}"><span class="variant-id">${String(v.number).padStart(2,'0')}</span><h3>${escape(v.title)}</h3><div class="variant-footer"><span>${v.parts} ${v.parts===1?'часть':v.parts<5?'части':'частей'}</span><span class="chip">Открыть ↗</span></div></button>`).join('')+'</div>';
  if(!visible.length)out+='<div class="empty"><h3>Варианты не найдены</h3><p>Попробуйте другой запрос или сбросьте фильтр.</p></div>';
  out+=`<p class="notice">Варианты 1–2 восстановлены как отдельные учебные упражнения, потому что их исходных файлов не было в переданном комплекте. Варианты 3–48 перенесены из подготовленных Word-документов.</p>`;
- shell(out);
+ app.innerHTML=out;
  $('variantSearch').addEventListener('input',e=>{search=e.target.value;renderCatalog(); const input=$('variantSearch');input.focus();input.setSelectionRange(search.length,search.length)});
  app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{selectedVariant=+b.dataset.open;render()});
 }
@@ -92,7 +115,7 @@ function renderJournal(){const g=currentGroup(),vars=groupAssignments(),stats=gr
  out+='</tbody></table></div><p class="subtitle">Нажмите на ячейку вида 0/4 или 2/4, чтобы отметить выполненные части варианта. Полная отметка возникает автоматически, когда зачтены все части.</p>';
  }
  out+=`<div class="notice">Данные оценок не хранятся на GitHub и не передаются другим пользователям. Они привязаны к текущему браузеру на этом устройстве. Для резервного копирования используйте «Настройки → Скачать JSON».</div>`;
- shell(out);bindGroupSelect();$('addStudent').onclick=()=>modalStudent(false);if($('quickAdd'))$('quickAdd').onclick=()=>modalStudent(true);if($('quickAssign'))$('quickAssign').onclick=modalAssign;$('assignVars').onclick=modalAssign;$('bulkStudents').onclick=()=>modalStudent(true);
+ app.innerHTML=out;bindGroupSelect();$('addStudent').onclick=()=>modalStudent(false);if($('quickAdd'))$('quickAdd').onclick=()=>modalStudent(true);if($('quickAssign'))$('quickAssign').onclick=modalAssign;$('assignVars').onclick=modalAssign;$('bulkStudents').onclick=()=>modalStudent(true);
  $('journalSearch').oninput=e=>{journalQuery=e.target.value;let start=e.target.selectionStart;render();$('journalSearch').focus();$('journalSearch').setSelectionRange(start,start)};
  if($('exportCSV'))$('exportCSV').onclick=exportCSV;
  app.querySelectorAll('[data-mark]').forEach(b=>b.onclick=()=>{const [sid,n]=b.dataset.mark.split(':');modalMark(sid,+n)});
@@ -120,7 +143,7 @@ function renderAnalytics(){let g=currentGroup(),stats=groupStats();let students=
  out+=`<div class="stats"><div class="card stat"><div class="stat-label">Студентов</div><div class="stat-value">${stats.count}</div></div><div class="card stat"><div class="stat-label">Средний процент</div><div class="stat-value">${stats.avg===null?'—':stats.avg+'%'}</div></div><div class="card stat"><div class="stat-label">Назначено вариантов</div><div class="stat-value">${stats.assigned}</div></div><div class="card stat"><div class="stat-label">Зачтено вариантов</div><div class="stat-value">${stats.done}</div></div></div>`;
  out+=`<div class="panel-grid"><div class="card"><h3>Распределение оценок</h3><p class="subtitle">Оценка выставляется от процента выполненных частей назначенных вариантов.</p><div class="chart-bars">${[2,3,4,5].map((n,i)=>{let h=stats.count?Math.round(stats.grades[i]/Math.max(1,...stats.grades)*120):0;return `<div class="column"><span>${stats.grades[i]}</span><div class="bar g${n}" style="height:${Math.max(4,h)}px"></div><span class="grade-pill g${n}">${n}</span></div>`}).join('')}</div></div><div class="card"><h3>Шкала оценивания</h3><div class="checkrow">${gPill(5)} <span>88–100% выполнения</span></div><div class="checkrow">${gPill(4)} <span>76–87%</span></div><div class="checkrow">${gPill(3)} <span>59–75%</span></div><div class="checkrow">${gPill(2)} <span>0–58%</span></div><p class="subtitle">Без назначенных вариантов оценка не выставляется.</p></div></div>`;
  out+=`<div class="card" style="margin-top:20px"><h3>Студенты группы ${escape(g.name)}</h3>${students.length?`<div class="task-table-wrap"><table class="task-table"><tr><th>ФИО</th><th>Выполнено</th><th>Процент</th><th>Оценка</th></tr>${students.map(s=>`<tr><td>${escape(s.name)}</td><td>${s.done}/${s.total}</td><td>${s.percent===null?'—':s.percent+'%'}</td><td>${gPill(s.grade)}</td></tr>`).join('')}</table></div>`:'<p class="muted">Сначала добавьте студентов в журнал.</p>'}</div>`;
- shell(out);bindGroupSelect();}
+ app.innerHTML=out;bindGroupSelect();}
 function downloadText(name,body,type){const b=new Blob([body],{type});let u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
 function exportJSON(){downloadText('de2027-journal-backup.json',JSON.stringify(db,null,2),'application/json;charset=utf-8')}
 function exportCSV(){let g=currentGroup(),lines=[['ФИО','Группа','Выполнено','Всего','Процент','Оценка'].join(';')];for(const st of g.students){const s=score(st);lines.push([st.name,g.name,s.done,s.total,s.percent??'',s.grade??''].map(x=>String(x).replaceAll(';',',')).join(';'))}downloadText(`de2027-${g.name}.csv`,'\ufeff'+lines.join('\r\n'),'text/csv;charset=utf-8')}
@@ -128,6 +151,6 @@ function importJSON(file){let r=new FileReader();r.onload=()=>{try{const x=JSON.
 function renderSettings(){let out=pageHeader('Управление','Настройки и данные','Локальный журнал — удобен для одного преподавателя и одного браузера. Данные групп и отметки не отправляются на GitHub.');
  out+=`<div class="panel-grid"><section class="card"><h3>Группы</h3><div class="row wrap">${db.groups.map(g=>`<span class="group-chip">${escape(g.name)} · ${g.students.length} студентов</span>`).join('')}</div><div class="row wrap" style="margin:17px 0"><input class="field grow" style="width:auto" id="newGroup" placeholder="Например, ОИ-207"><button class="btn" id="createGroup">+ Добавить группу</button></div><h3>Резервное копирование</h3><p class="subtitle">JSON сохраняет группы, отметки и назначенные варианты. Держите файл в безопасном месте.</p><div class="row wrap" style="margin-top:14px"><button class="btn primary" id="jsonExport">↓ Скачать JSON</button><label class="btn" for="jsonImport" style="cursor:pointer">↑ Загрузить JSON</label><input id="jsonImport" class="hidden" type="file" accept=".json,application/json"></div><p class="subtitle" style="margin-top:16px">CSV содержит оценки текущей группы; его можно открыть в Excel.</p><button class="btn" id="settingsCSV">↓ Экспорт CSV</button></section><aside class="card"><h3>Шкала оценок</h3><p>5 — от 88%<br>4 — от 76%<br>3 — от 59%<br>2 — до 58%</p><h3>Как считается процент?</h3><p class="subtitle">Зачтённые части всех назначенных группе вариантов / общее количество частей этих вариантов × 100%.</p><h3>Сохранность данных</h3><p class="subtitle">Если очистить данные браузера, отметки могут исчезнуть. Периодически сохраняйте JSON.</p></aside></div>`;
  out+=`<div class="privacy" style="margin-top:19px"><strong>Конфиденциальность:</strong> GitHub Pages — общедоступный статический сайт. Поэтому фамилии и оценки не размещаются в коде сайта и не доступны другим посетителям. Встроенный журнал хранится только в браузере. Для общего журнала с синхронизацией между компьютерами, входом преподавателя и резервированием понадобится отдельная защищённая база данных и авторизация.</div>`;
- shell(out);$('createGroup').onclick=()=>{let name=$('newGroup').value.trim();if(name.length<3){alert('Введите название группы');return}if(db.groups.some(g=>g.name.toLowerCase()===name.toLowerCase())){alert('Группа уже существует');return}const id='g'+Date.now().toString(36);db.groups.push({id,name,students:[]});db.assigned[id]=[];selectedGroup=id;save();render()};$('jsonExport').onclick=exportJSON;$('settingsCSV').onclick=exportCSV;$('jsonImport').onchange=e=>{if(e.target.files?.[0])importJSON(e.target.files[0])};}
+ app.innerHTML=out;$('createGroup').onclick=()=>{let name=$('newGroup').value.trim();if(name.length<3){alert('Введите название группы');return}if(db.groups.some(g=>g.name.toLowerCase()===name.toLowerCase())){alert('Группа уже существует');return}const id='g'+Date.now().toString(36);db.groups.push({id,name,students:[]});db.assigned[id]=[];selectedGroup=id;save();render()};$('jsonExport').onclick=exportJSON;$('settingsCSV').onclick=exportCSV;$('jsonImport').onchange=e=>{if(e.target.files?.[0])importJSON(e.target.files[0])};}
 render();
 })();
