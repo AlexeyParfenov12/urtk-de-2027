@@ -6,7 +6,6 @@
   const sections = [
     ['catalog', 'Варианты', '▦'],
     ['guides', 'Методички', '▧'],
-    ['settings', 'Настройки', '⚙'],
   ];
 
   header.innerHTML = `
