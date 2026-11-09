@@ -6,9 +6,9 @@ const GUIDE_IDS=['word','merge','powerpoint','slider'];
 const defaultData=()=>({groups:[{id:'oi205',name:'ОИ-205',students:[]},{id:'oi206',name:'ОИ-206',students:[]}],assigned:{oi205:[],oi206:[]},marks:{},custom:{}});
 function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.groups)&&x.assigned&&x.marks)return x}catch(e){}return defaultData()}
 const VIEWS=new Set(['catalog','journal','analytics','settings']);
-let db=load(), view=readView(), selectedVariant=null, selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
 const app=document.getElementById('app');
 const header=document.querySelector('[data-site-header]');
+let db=load(), view=readView(), selectedVariant=null, selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
 function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){alert('Не удалось сохранить данные. Экспортируйте резервную копию.') }}
 const $=(id)=>document.getElementById(id); const escape=(s)=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const currentGroup=()=>db.groups.find(g=>g.id===selectedGroup)||db.groups[0];
@@ -22,7 +22,10 @@ function groupStats(){let g=currentGroup(),students=g?.students||[];let ss=stude
 function gPill(grade){return grade?`<span class="grade-pill g${grade}">${grade}</span>`:'<span class="grade-pill">—</span>'}
 function readView() {
   const section=location.hash.slice(1);
-  return VIEWS.has(section) ? section : 'catalog';
+  if (!VIEWS.has(section)) return 'catalog';
+  if (header.querySelector('[data-nav="'+section+'"]')) return section;
+  history.replaceState(history.state,'','#catalog');
+  return 'catalog';
 }
 function showSection() {
   view=readView();
@@ -39,7 +42,7 @@ function pageHeader(label,title,sub,actions=''){return `<div class="page-top"><d
 function render() {
   header.querySelector('[aria-current]')?.removeAttribute('aria-current');
   header.querySelector('[data-nav="'+view+'"]').setAttribute('aria-current','page');
-  document.title=(selectedVariant&&view==='catalog'?'Вариант '+selectedVariant+' · ':'')+'Практика ДЭ · журнал';
+  document.title=(selectedVariant&&view==='catalog'?'Вариант '+selectedVariant+' · ':'')+'Практика ДЭ';
   if(view==='catalog')renderCatalog();
   else if(view==='journal')renderJournal();
   else if(view==='analytics')renderAnalytics();
@@ -91,7 +94,7 @@ function renderCatalog(){if(selectedVariant){const d=byNum.get(selectedVariant);
  html+=`<div class="panel-grid"><article class="card"><div class="task-meta"><span class="chip">${d.parts} ${d.parts===1?'часть':d.parts<5?'части':'частей'}</span>${d.generated?'<span class="chip muted">Дополнительный учебный вариант</span>':''}</div><div class="task-content">${kimMailPreview(d.html,d.number)}</div></article><aside class="variant-guides"><div class="side-panel"><b>Методички к варианту</b><p>${Array.from({length:d.parts},(_,i)=>`${i+1}. <a href="methodichki/#${GUIDE_IDS[i]}">${escape(PARTS[i])}</a>`).join('<br>')}</p><p>Сохраните выполненные файлы в папку с нужным именем. Если показатели в тренажёре отличаются от КИМ на экзамене, приоритет имеет выданное задание.</p></div></aside></div>`;app.innerHTML=html;$('backV').onclick=()=>{selectedVariant=null;render()};$('printV').onclick=()=>window.print();return}
  const visible=V.filter(v=>{let f=filter==='all'||(filter==='word'&&v.parts===1)||(filter==='merge'&&v.parts===2)||(filter==='ppt'&&v.parts===3)||(filter==='slider'&&v.parts===4);return f&&(!search||String(v.number).includes(search)||v.title.toLowerCase().includes(search.toLowerCase()))});
  let out=pageHeader('Библиотека заданий','Каталог вариантов','Подборка учебных работ №1–48 с постепенным расширением навыков: Word, рассылка, презентации и мобильный слайдер.');
- out+=`<section class="card hero"><div><div class="eyebrow" style="color:#a2c9bb">Подготовка к демонстрационному экзамену</div><h2>От первого документа<br>до комплексного задания</h2><p>Изучайте варианты, а выполнение отмечайте в преподавательском журнале. Все задания доступны для просмотра и печати.</p></div><div class="number">48</div></section>`;
+ out+=`<section class="card hero"><div><div class="eyebrow" style="color:#a2c9bb">Подготовка к демонстрационному экзамену</div><h2>От первого документа<br>до комплексного задания</h2><p>Изучайте варианты и выполняйте задания по пошаговым методичкам. Все задания доступны для просмотра и печати.</p></div><div class="number">48</div></section>`;
  out+=`<div class="stats"><div class="card stat"><div class="stat-label">Всего вариантов</div><div class="stat-value">48</div><div class="stat-note">№1–48</div></div><div class="card stat"><div class="stat-label">Word</div><div class="stat-value">48</div><div class="stat-note">Повторение базового навыка</div></div><div class="card stat"><div class="stat-label">Слияние</div><div class="stat-value">30</div><div class="stat-note">Начиная с №19</div></div><div class="card stat"><div class="stat-label">Слайдер</div><div class="stat-value">10</div><div class="stat-note">Варианты 39–48</div></div></div>`;
  out+=`<div class="toolbar"><label class="search"><span>⌕</span><input id="variantSearch" placeholder="Номер или тема задания" value="${escape(search)}"></label><div class="filter-tabs">${[['all','Все'],['word','1 часть'],['merge','2 части'],['ppt','3 части'],['slider','4 части']].map(([a,b])=>`<button data-filter="${a}" class="${a===filter?'active':''}">${b}</button>`).join('')}</div></div><div class="variant-grid">`;
  out+=visible.map(v=>`<button class="variant-card" data-open="${v.number}"><span class="variant-id">${String(v.number).padStart(2,'0')}</span><h3>${escape(v.title)}</h3><div class="variant-footer"><span>${v.parts} ${v.parts===1?'часть':v.parts<5?'части':'частей'}</span><span class="chip">Открыть ↗</span></div></button>`).join('')+'</div>';
