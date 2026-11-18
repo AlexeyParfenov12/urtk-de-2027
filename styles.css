@@ -30,6 +30,7 @@
 .guides li+li{margin-top:7px}
 .guides .task-content{font-size:15px}
 .guides .btn{white-space:normal;text-align:center;text-decoration:none}
+.guides .task-content a:not(.btn){color:var(--teal);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:850px){.variant-guides{order:-1}}
 
 /* Site navigation */
