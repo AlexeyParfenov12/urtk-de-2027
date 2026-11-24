@@ -1,7 +1,7 @@
 /* Практика ДЭ — автономный журнал. Студенты не загружаются на сервер. */
 (()=>{'use strict';
 const V=window.DE_VARIANTS||[], byNum=new Map(V.map(v=>[v.number,v])), KEY='de2027_teachers_progress_v1';
-const PARTS=['Набор и оформление Word','Слияние документов','Презентация PowerPoint','Мобильный слайдер','База данных в Access'];
+const PARTS=['Набор и оформление Word','Слияние документов','Презентация PowerPoint','Мобильный слайдер','Таблицы и выборки'];
 const GUIDE_IDS=['word','merge','powerpoint','slider','database'];
 const lastVariant=V.at(-1)?.number||0;
 const filterOptions=[['all','Все'],...PARTS.map((_,i)=>[String(i+1),i===0?'1 часть':i<4?(i+1)+' части':'5 частей'])];
