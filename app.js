@@ -1,14 +1,16 @@
 /* Практика ДЭ — автономный журнал. Студенты не загружаются на сервер. */
 (()=>{'use strict';
 const V=window.DE_VARIANTS||[], byNum=new Map(V.map(v=>[v.number,v])), KEY='de2027_teachers_progress_v1';
-const PARTS=['Набор и оформление Word','Слияние документов','Презентация PowerPoint','Мобильный слайдер'];
-const GUIDE_IDS=['word','merge','powerpoint','slider'];
+const PARTS=['Набор и оформление Word','Слияние документов','Презентация PowerPoint','Мобильный слайдер','База данных в Access'];
+const GUIDE_IDS=['word','merge','powerpoint','slider','database'];
+const lastVariant=V.at(-1)?.number||0;
+const filterOptions=[['all','Все'],...PARTS.map((_,i)=>[String(i+1),i===0?'1 часть':i<4?(i+1)+' части':'5 частей'])];
 const defaultData=()=>({groups:[{id:'oi205',name:'ОИ-205',students:[]},{id:'oi206',name:'ОИ-206',students:[]}],assigned:{oi205:[],oi206:[]},marks:{},custom:{}});
 function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.groups)&&x.assigned&&x.marks)return x}catch(e){}return defaultData()}
 const VIEWS=new Set(['catalog','journal','analytics','settings']);
 const app=document.getElementById('app');
 const header=document.querySelector('[data-site-header]');
-let db=load(), view=readView(), selectedVariant=null, selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
+let db=load(), view=readView(), selectedVariant=readVariant(), selectedGroup=db.groups[0]?.id||'oi205',search='',filter='all',journalQuery='';
 function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){alert('Не удалось сохранить данные. Экспортируйте резервную копию.') }}
 const $=(id)=>document.getElementById(id); const escape=(s)=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#39;');
 const currentGroup=()=>db.groups.find(g=>g.id===selectedGroup)||db.groups[0];
@@ -27,9 +29,14 @@ function readView() {
   history.replaceState(history.state,'','#catalog');
   return 'catalog';
 }
+function readVariant() {
+  const match=location.hash.match(/^#variant-(\d+)$/);
+  const number=match ? Number(match[1]) : null;
+  return byNum.has(number) ? number : null;
+}
 function showSection() {
   view=readView();
-  selectedVariant=null;
+  selectedVariant=readVariant();
   render();
   window.scrollTo(0,0);
 }
@@ -90,20 +97,58 @@ function kimMailPreview(html,variantNumber){
   return html.slice(0,start)+example+html.slice(end+close.length);
 }
 
-function renderCatalog(){if(selectedVariant){const d=byNum.get(selectedVariant);let html=pageHeader('Каталог / Вариант '+d.number,`Вариант №${d.number}`,escape(d.title),`<button class="btn" id="printV">⎙ Печать / PDF</button><button class="btn primary" id="backV">Все варианты</button>`);
- html+=`<div class="panel-grid"><article class="card"><div class="task-meta"><span class="chip">${d.parts} ${d.parts===1?'часть':d.parts<5?'части':'частей'}</span>${d.generated?'<span class="chip muted">Дополнительный учебный вариант</span>':''}</div><div class="task-content">${kimMailPreview(d.html,d.number)}</div></article><aside class="variant-guides"><div class="side-panel"><b>Методички к варианту</b><p>${Array.from({length:d.parts},(_,i)=>`${i+1}. <a href="methodichki/#${GUIDE_IDS[i]}">${escape(PARTS[i])}</a>`).join('<br>')}</p><p>Сохраните выполненные файлы в папку с нужным именем. Если показатели в тренажёре отличаются от КИМ на экзамене, приоритет имеет выданное задание.</p></div></aside></div>`;app.innerHTML=html;$('backV').onclick=()=>{selectedVariant=null;render()};$('printV').onclick=()=>window.print();return}
- const visible=V.filter(v=>{let f=filter==='all'||(filter==='word'&&v.parts===1)||(filter==='merge'&&v.parts===2)||(filter==='ppt'&&v.parts===3)||(filter==='slider'&&v.parts===4);return f&&(!search||String(v.number).includes(search)||v.title.toLowerCase().includes(search.toLowerCase()))});
- let out=pageHeader('Библиотека заданий','Каталог вариантов','Подборка учебных работ №1–48 с постепенным расширением навыков: Word, рассылка, презентации и мобильный слайдер.');
- out+=`<section class="card hero"><div><div class="eyebrow" style="color:#a2c9bb">Подготовка к демонстрационному экзамену</div><h2>От первого документа<br>до комплексного задания</h2><p>Изучайте варианты и выполняйте задания по пошаговым методичкам. Все задания доступны для просмотра и печати.</p></div><div class="number">48</div></section>`;
- out+=`<div class="stats"><div class="card stat"><div class="stat-label">Всего вариантов</div><div class="stat-value">48</div><div class="stat-note">№1–48</div></div><div class="card stat"><div class="stat-label">Word</div><div class="stat-value">48</div><div class="stat-note">Повторение базового навыка</div></div><div class="card stat"><div class="stat-label">Слияние</div><div class="stat-value">30</div><div class="stat-note">Начиная с №19</div></div><div class="card stat"><div class="stat-label">Слайдер</div><div class="stat-value">10</div><div class="stat-note">Варианты 39–48</div></div></div>`;
- out+=`<div class="toolbar"><label class="search"><span>⌕</span><input id="variantSearch" placeholder="Номер или тема задания" value="${escape(search)}"></label><div class="filter-tabs">${[['all','Все'],['word','1 часть'],['merge','2 части'],['ppt','3 части'],['slider','4 части']].map(([a,b])=>`<button data-filter="${a}" class="${a===filter?'active':''}">${b}</button>`).join('')}</div></div><div class="variant-grid">`;
- out+=visible.map(v=>`<button class="variant-card" data-open="${v.number}"><span class="variant-id">${String(v.number).padStart(2,'0')}</span><h3>${escape(v.title)}</h3><div class="variant-footer"><span>${v.parts} ${v.parts===1?'часть':v.parts<5?'части':'частей'}</span><span class="chip">Открыть ↗</span></div></button>`).join('')+'</div>';
- if(!visible.length)out+='<div class="empty"><h3>Варианты не найдены</h3><p>Попробуйте другой запрос или сбросьте фильтр.</p></div>';
- out+=`<p class="notice">Варианты 1–2 восстановлены как отдельные учебные упражнения, потому что их исходных файлов не было в переданном комплекте. Варианты 3–48 перенесены из подготовленных Word-документов.</p>`;
- app.innerHTML=out;
- $('variantSearch').addEventListener('input',e=>{search=e.target.value;renderCatalog(); const input=$('variantSearch');input.focus();input.setSelectionRange(search.length,search.length)});
- app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});app.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{selectedVariant=+b.dataset.open;render()});
+function renderCatalog() {
+  if (selectedVariant) {
+    const variant=byNum.get(selectedVariant);
+    const download=variant.download ? '<a class="btn" href="'+escape(variant.download)+'" download>Скачать DOCX и исходники</a>' : '';
+    const guides=PARTS.slice(0,variant.parts).map((name,i)=>
+      `<li><a href="methodichki/#${GUIDE_IDS[i]}">${escape(name)}</a></li>`
+    ).join('');
+    app.innerHTML=pageHeader(
+      'Каталог / Вариант '+variant.number,'Вариант №'+variant.number,escape(variant.title),
+      download+'<button class="btn" id="printV">⎙ Печать / PDF</button><a class="btn primary" href="#catalog">Все варианты</a>'
+    )+`<div class="panel-grid">
+      <article class="card">
+        <div class="task-meta"><span class="chip">${filterOptions[variant.parts][1]}</span>
+        ${variant.generated?'<span class="chip muted">Дополнительный учебный вариант</span>':''}</div>
+        <div class="task-content">${kimMailPreview(variant.html,variant.number)}</div>
+      </article>
+      <aside class="variant-guides"><div class="side-panel"><b>Методички к варианту</b>
+        <ol>${guides}</ol>
+        <p>Сохраните выполненные файлы в папку с нужным именем. На экзамене применяйте параметры выданного задания.</p>
+      </div></aside>
+    </div>`;
+    $('printV').onclick=()=>window.print();
+    return;
+  }
+
+  const query=search.toLowerCase();
+  const visible=V.filter(v=>(filter==='all'||String(v.parts)===filter)&&
+    (!query||String(v.number).includes(query)||v.title.toLowerCase().includes(query)));
+  const stats=[
+    ['Всего вариантов',V.length,'№1–'+lastVariant],
+    ['Слияние',V.filter(v=>v.parts>=2).length,'Начиная с №19'],
+    ['Слайдер',V.filter(v=>v.parts>=4).length,'Начиная с №39'],
+    ['База данных',V.filter(v=>v.parts>=5).length,'Начиная с №49']
+  ];
+  let out=pageHeader('Библиотека заданий','Каталог вариантов','Подборка учебных работ №1–'+lastVariant+' по Word, слиянию, PowerPoint, слайдеру и базам данных.');
+  out+=`<section class="card hero"><div><div class="eyebrow" style="color:#a2c9bb">Подготовка к демонстрационному экзамену</div><h2>От первого документа<br>до комплексного задания</h2><p>Изучайте варианты и выполняйте задания по пошаговым методичкам. Все задания доступны для просмотра и печати.</p></div><div class="number">${V.length}</div></section>`;
+  out+=`<div class="stats">${stats.map(([label,count,note])=>`<div class="card stat"><div class="stat-label">${label}</div><div class="stat-value">${count}</div><div class="stat-note">${note}</div></div>`).join('')}</div>`;
+  out+=`<div class="toolbar"><label class="search"><span>⌕</span><input id="variantSearch" placeholder="Номер или тема задания" value="${escape(search)}"></label><div class="filter-tabs">${filterOptions.map(([value,label])=>`<button data-filter="${value}" class="${value===filter?'active':''}">${label}</button>`).join('')}</div></div><div class="variant-grid">`;
+  out+=visible.map(v=>`<a href="#variant-${v.number}" class="variant-card" data-open="${v.number}"><span class="variant-id">${String(v.number).padStart(2,'0')}</span><h3>${escape(v.title)}</h3><div class="variant-footer"><span>${filterOptions[v.parts][1]}</span><span class="chip">Открыть ↗</span></div></a>`).join('')+'</div>';
+  if(!visible.length) out+='<div class="empty"><h3>Варианты не найдены</h3><p>Попробуйте другой запрос или сбросьте фильтр.</p></div>';
+  out+='<p class="notice">Варианты 1–2 восстановлены как отдельные учебные упражнения. Варианты 3–48 перенесены из подготовленных Word-документов. Варианты 49–58 включают пять заданий по образцу КИМ.</p>';
+  app.innerHTML=out;
+  $('variantSearch').addEventListener('input',e=>{
+    search=e.target.value;
+    renderCatalog();
+    const input=$('variantSearch');
+    input.focus();
+    input.setSelectionRange(search.length,search.length);
+  });
+  app.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;render()});
 }
+
 function groupSelect(){return `<select id="groupSelect" class="field" style="width:auto;min-width:130px">${db.groups.map(g=>`<option value="${escape(g.id)}" ${g.id===selectedGroup?'selected':''}>${escape(g.name)}</option>`).join('')}</select>`}
 function bindGroupSelect(){const s=$('groupSelect');if(s)s.onchange=e=>{selectedGroup=e.target.value;render()}}
 function renderJournal(){const g=currentGroup(),vars=groupAssignments(),stats=groupStats(),filtered=(g?.students||[]).filter(s=>s.name.toLowerCase().includes(journalQuery.toLowerCase()));
@@ -132,7 +177,7 @@ function modalStudent(multi){let g=currentGroup(),body=multi?`<p>Вставьт�
 function modalAssign(){let assigned=new Set(groupAssignments());let body=`<p>Отметьте варианты, которые уже выданы группе <b>${escape(currentGroup().name)}</b>. Только по ним рассчитывается процент выполнения.</p><label class="form-label">Быстрый ввод: 1-5, 11, 39-48</label><input class="field" id="rangeInput" placeholder="39-48"><button class="btn small" id="applyRange" style="margin-top:8px">Выделить указанные</button><div class="checkbox-grid" id="variantChecks">${V.map(v=>`<label class="${assigned.has(v.number)?'selected':''}"><input type="checkbox" value="${v.number}" ${assigned.has(v.number)?'checked':''}>${v.number}</label>`).join('')}</div>`;
  let bg=modal('Назначить варианты',body,`<button class="btn primary" id="saveAssigned">Сохранить назначение</button>`);
  const grid=bg.querySelector('#variantChecks');grid.onchange=e=>{if(e.target.matches('input'))e.target.closest('label').classList.toggle('selected',e.target.checked)};
- bg.querySelector('#applyRange').onclick=()=>{const set=new Set();const text=bg.querySelector('#rangeInput').value;for(const p of text.split(/[,;\s]+/)){if(!p)continue;let m=p.match(/^(\d+)-(\d+)$/);if(m){for(let i=Math.max(1,+m[1]);i<=Math.min(48,+m[2]);i++)set.add(i)}else if(/^\d+$/.test(p)&&+p<=48&&+p>0)set.add(+p)}if(!set.size){alert('Введите номера, например 39-48');return}grid.querySelectorAll('input').forEach(inp=>{if(set.has(+inp.value)){inp.checked=true;inp.closest('label').classList.add('selected')}})};
+ bg.querySelector('#applyRange').onclick=()=>{const set=new Set();const text=bg.querySelector('#rangeInput').value;for(const p of text.split(/[,;\s]+/)){if(!p)continue;let m=p.match(/^(\d+)-(\d+)$/);if(m){for(let i=Math.max(1,+m[1]);i<=Math.min(lastVariant,+m[2]);i++)set.add(i)}else if(/^\d+$/.test(p)&&+p<=lastVariant&&+p>0)set.add(+p)}if(!set.size){alert('Введите номера, например 39-48');return}grid.querySelectorAll('input').forEach(inp=>{if(set.has(+inp.value)){inp.checked=true;inp.closest('label').classList.add('selected')}})};
  bg.querySelector('#saveAssigned').onclick=()=>{db.assigned[selectedGroup]=[...grid.querySelectorAll('input:checked')].map(i=>+i.value).sort((a,b)=>a-b);save();bg.remove();render()};
 }
 function modalMark(sid,n){let g=currentGroup(),st=g.students.find(s=>s.id===sid),v=byNum.get(n);if(!st||!v)return;const current=db.marks[sid]?.[n]||{};

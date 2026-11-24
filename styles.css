@@ -31,6 +31,11 @@
 .guides .task-content{font-size:15px}
 .guides .btn{white-space:normal;text-align:center;text-decoration:none}
 .guides .task-content a:not(.btn){color:var(--teal);text-decoration:underline;text-underline-offset:3px}
+.panel-grid > article{min-width:0}
+.variant-guides ol{padding-left:22px}
+.task-sql{overflow-x:auto;padding:10px 12px;background:#f3f8f5;border:1px solid var(--line);border-radius:8px}
+.task-equation{margin:12px 0 20px;overflow:auto;font-size:1.2em}
+.task-content .source-files a{color:var(--teal);text-decoration:underline;text-underline-offset:3px}
 @media(max-width:850px){.variant-guides{order:-1}}
 
 /* Site navigation */
