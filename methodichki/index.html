@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0f3e45">
-  <meta name="description" content="Пошаговые методички по Word, слиянию документов, PowerPoint, мобильному слайдеру и выборкам данных в Excel и Access для практики ДЭ 09.01.03.">
+  <meta name="description" content="Пошаговые методички по Word, слиянию документов, PowerPoint, мобильному слайдеру и выборкам данных в Excel для практики ДЭ 09.01.03.">
   <title>Методички по выполнению заданий · Практика ДЭ</title>
-  <link rel="stylesheet" href="../styles.css?v=20261124-3">
+  <link rel="stylesheet" href="../styles.css?v=20261124-4">
   <script src="../site-navigation.js?v=20261109-4" defer></script>
+  <script src="guide-screenshots.js" defer></script>
 </head>
 <body>
   <header class="site-header" data-site-header data-site-root="../" data-section="guides"></header>
@@ -28,7 +29,7 @@
         <li><a href="#merge">Слияние документов в Word</a> <span class="muted">· варианты 19–58</span></li>
         <li><a href="#powerpoint">Презентация в PowerPoint</a> <span class="muted">· варианты 29–58</span></li>
         <li><a href="#slider">Создание мобильного слайдера</a> <span class="muted">· варианты 39–58</span></li>
-        <li><a href="#database">Таблицы и выборки в Microsoft Excel</a> <span class="muted">· варианты 49–58</span> · <a href="#database-access">Методичка по Access</a></li>
+        <li><a href="#database">Таблицы и выборки в Microsoft Excel</a> <span class="muted">· варианты 49–58</span></li>
       </ol>
     </nav>
 
@@ -179,8 +180,8 @@
       <span class="chip">Часть 5 · Варианты 49–58</span>
       <h2>Таблицы и выборки в Microsoft Excel</h2>
       <p>Создайте одну книгу Excel с таблицами «Студент» и «Работник» и сохраните в ней три выборки. Города, должность и записи берите из своего варианта. Для выборок используйте кнопки Power Query на вкладке «Данные».</p>
-      <p>На снимках показана учебная книга с вымышленными записями. Для примера выбраны Казань, Тула и должность «инженер». На телефоне широкие снимки можно прокрутить вбок. Нажмите на снимок, чтобы открыть его в полном размере.</p>
-      <p><a href="#excel-tables">Подготовка таблиц</a> · <a href="#excel-queries">Три выборки</a> · <a href="#excel-check">Проверка перед сдачей</a> · <a href="#database-access">Выполнение в Access</a></p>
+      <p>На снимках показана учебная книга с вымышленными записями. Для примера выбраны Казань, Тула и должность «инженер». Красные рамки показывают, куда нажать. На телефоне широкие снимки можно прокрутить вбок. Нажмите на снимок, чтобы открыть его в полном размере.</p>
+      <p><a href="#excel-tables">Подготовка таблиц</a> · <a href="#excel-queries">Три выборки</a> · <a href="#excel-check">Проверка перед сдачей</a></p>
 
       <h3 id="excel-tables">1. Подготовьте две таблицы</h3>
       <ol>
@@ -190,11 +191,22 @@
         <li>На листе «Студент» выделите диапазон A1:G11 и нажмите <kbd>Ctrl</kbd> + <kbd>T</kbd>. Проверьте диапазон и поставьте флажок «Таблица с заголовками». Нажмите «ОК». На вкладке «Конструктор таблиц» укажите имя таблицы <code>Студенты</code>. Повторите на листе «Работник» с именем <code>Работники</code>.</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/create-table.webp?v=20261124-3"><img src="../assets/guide-excel/create-table.webp?v=20261124-3" width="363" height="202" loading="lazy" alt="Диалог «Создание таблицы» с диапазоном A1:G11 и включённым флажком заголовков"></a>
+        <a href="../assets/guide-excel/create-table.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/create-table.webp?v=20261124-3" width="363" height="202" loading="lazy" alt="Диалог «Создание таблицы» с диапазоном A1:G11 и включённым флажком заголовков">
+            <span class="guide-screenshot-mark" style="--x:13.5%;--y:53.47%;--w:49.59%;--h:15.84%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:27.27%;--y:74.75%;--w:33.33%;--h:18.32%" aria-hidden="true"></span>
+          </span>
+        </a>
         <figcaption>После Ctrl + T проверьте диапазон и флажок «Таблица с заголовками».</figcaption>
       </figure>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/table-name.webp?v=20261124-3"><img src="../assets/guide-excel/table-name.webp?v=20261124-3" width="627" height="239" loading="lazy" alt="В левом углу вкладки «Конструктор таблиц» указано имя «Студенты»"></a>
+        <a href="../assets/guide-excel/table-name.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/table-name.webp?v=20261124-3" width="627" height="239" loading="lazy" alt="В левом углу вкладки «Конструктор таблиц» указано имя «Студенты»">
+            <span class="guide-screenshot-mark" style="--x:1.12%;--y:12.55%;--w:25.84%;--h:15.48%" aria-hidden="true"></span>
+          </span>
+        </a>
         <figcaption>Введите имя таблицы слева на вкладке «Конструктор таблиц» и нажмите Enter.</figcaption>
       </figure>
       <div class="task-table-wrap">
@@ -215,7 +227,13 @@
       <h3 id="excel-queries">2. Соберите три выборки в Power Query</h3>
       <p>Каждую выборку начинайте с исходного листа. Щёлкните любую ячейку внутри его таблицы, откройте «Данные» и нажмите «Из таблицы/диапазона». Команда может находиться внутри меню «Получить данные». Откроется редактор Power Query.</p>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/from-table.webp?v=20261124-3"><img src="../assets/guide-excel/from-table.webp?v=20261124-3" width="842" height="157" loading="lazy" alt="Команда «Из таблицы/диапазона» слева на вкладке «Данные»"></a>
+        <a href="../assets/guide-excel/from-table.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/from-table.webp?v=20261124-3" width="842" height="157" loading="lazy" alt="Команда «Из таблицы/диапазона» слева на вкладке «Данные»">
+            <span class="guide-screenshot-mark" style="--x:80.64%;--y:2.55%;--w:10.1%;--h:22.93%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:9.74%;--y:62.42%;--w:24.7%;--h:19.75%" aria-hidden="true"></span>
+          </span>
+        </a>
         <figcaption>Команда «Из таблицы/диапазона» открывает исходную таблицу в Power Query.</figcaption>
       </figure>
       <h4>Выборка 1. Телефонная книга</h4>
@@ -235,25 +253,56 @@
         </ol>
         <div class="guide-screenshot-pair">
           <figure class="guide-screenshot">
-            <a href="../assets/guide-excel/type-menu.webp?v=20261124-3"><img src="../assets/guide-excel/type-menu.webp?v=20261124-3" width="260" height="374" loading="lazy" alt="Команда «Текст» в списке типов данных на вкладке «Главная»"></a>
+            <a href="../assets/guide-excel/type-menu.webp?v=20261124-3">
+              <span class="guide-screenshot-frame">
+                <img src="../assets/guide-excel/type-menu.webp?v=20261124-3" width="260" height="374" loading="lazy" alt="Команда «Текст» в списке типов данных на вкладке «Главная»">
+                <span class="guide-screenshot-mark" style="--x:1.92%;--y:1.87%;--w:52.69%;--h:7.75%" aria-hidden="true"></span>
+                <span class="guide-screenshot-mark" style="--x:15%;--y:75.4%;--w:23.85%;--h:8.02%" aria-hidden="true"></span>
+              </span>
+            </a>
             <figcaption>Выберите тип «Текст» на ленте.</figcaption>
           </figure>
           <figure class="guide-screenshot">
-            <a href="../assets/guide-excel/replace-type.webp?v=20261124-3"><img src="../assets/guide-excel/replace-type.webp?v=20261124-3" width="579" height="260" loading="lazy" alt="Диалог изменения типа столбца с кнопкой «Заменить текущее»"></a>
+            <a href="../assets/guide-excel/replace-type.webp?v=20261124-3">
+              <span class="guide-screenshot-frame">
+                <img src="../assets/guide-excel/replace-type.webp?v=20261124-3" width="579" height="260" loading="lazy" alt="Диалог изменения типа столбца с кнопкой «Заменить текущее»">
+                <span class="guide-screenshot-mark" style="--x:31.26%;--y:70.77%;--w:25.56%;--h:15%" aria-hidden="true"></span>
+              </span>
+            </a>
             <figcaption>Нажмите «Заменить текущее», чтобы исправить автоматический шаг.</figcaption>
           </figure>
         </div>
       </details>
       <div class="guide-screenshot-pair">
         <figure class="guide-screenshot">
-          <a href="../assets/guide-excel/choose-columns.webp?v=20261124-3"><img src="../assets/guide-excel/choose-columns.webp?v=20261124-3" width="440" height="362" loading="lazy" alt="В окне «Выбор столбцов» отмечены фамилия, имя, отчество и номер телефона"></a>
+          <a href="../assets/guide-excel/choose-columns.webp?v=20261124-3">
+            <span class="guide-screenshot-frame">
+              <img src="../assets/guide-excel/choose-columns.webp?v=20261124-3" width="440" height="362" loading="lazy" alt="В окне «Выбор столбцов» отмечены фамилия, имя, отчество и номер телефона">
+              <span class="guide-screenshot-mark" style="--x:10.91%;--y:55.8%;--w:26.82%;--h:21.27%" aria-hidden="true"></span>
+              <span class="guide-screenshot-mark" style="--x:11.14%;--y:83.15%;--w:35.91%;--h:8.29%" aria-hidden="true"></span>
+            </span>
+          </a>
           <figcaption>Оставьте четыре поля телефонной книги.</figcaption>
         </figure>
         <figure class="guide-screenshot">
-          <a href="../assets/guide-excel/phone-loaded.webp?v=20261124-3"><img src="../assets/guide-excel/phone-loaded.webp?v=20261124-3" width="488" height="287" loading="lazy" alt="Загруженный лист с десятью строками телефонной книги и номерами с начальными нулями"></a>
+          <a href="../assets/guide-excel/phone-loaded.webp?v=20261124-3">
+            <span class="guide-screenshot-frame">
+              <img src="../assets/guide-excel/phone-loaded.webp?v=20261124-3" width="488" height="287" loading="lazy" alt="Загруженный лист с десятью строками телефонной книги и номерами с начальными нулями">
+            </span>
+          </a>
           <figcaption>В готовой телефонной книге 10 строк. Первые нули в номерах сохранились.</figcaption>
         </figure>
       </div>
+
+      <figure class="guide-screenshot">
+        <a href="../assets/guide-excel/close-and-load.webp">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/close-and-load.webp" width="376" height="151" loading="lazy" alt="Выделена команда «Закрыть и загрузить» на вкладке «Главная» Power Query">
+            <span class="guide-screenshot-mark" style="--x:1.6%;--y:24.5%;--w:20.48%;--h:56.29%" aria-hidden="true"></span>
+          </span>
+        </a>
+        <figcaption>Нажмите верхнюю часть кнопки «Закрыть и загрузить», чтобы вывести результат на отдельный лист.</figcaption>
+      </figure>
       <h4>Выборка 2. Студенты из двух городов</h4>
       <ol>
         <li>Вернитесь на исходный лист «Студент» и снова выберите «Данные → Из таблицы/диапазона». Назовите новый запрос «Студенты из двух городов».</li>
@@ -262,11 +311,23 @@
         <li>Убедитесь, что остались строки из любого из двух выбранных городов и видны все семь столбцов. Нажмите «Закрыть и загрузить».</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/cities-filter.webp?v=20261124-3"><img src="../assets/guide-excel/cities-filter.webp?v=20261124-3" width="440" height="453" loading="lazy" alt="В фильтре столбца «Адрес» отмечены Казань и Тула"></a>
+        <a href="../assets/guide-excel/cities-filter.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/cities-filter.webp?v=20261124-3" width="440" height="453" loading="lazy" alt="В фильтре столбца «Адрес» отмечены Казань и Тула">
+            <span class="guide-screenshot-mark" style="--x:92.27%;--y:1.32%;--w:6.59%;--h:6.4%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:12.05%;--y:63.8%;--w:26.14%;--h:6.62%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:12.05%;--y:81.24%;--w:21.59%;--h:5.74%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:56.59%;--y:88.96%;--w:19.32%;--h:8.17%" aria-hidden="true"></span>
+          </span>
+        </a>
         <figcaption>В учебной книге отмечены «г. Казань» и «г. Тула». В своей книге отметьте два города из задания.</figcaption>
       </figure>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/cities-loaded.webp?v=20261124-3"><img src="../assets/guide-excel/cities-loaded.webp?v=20261124-3" width="855" height="173" loading="lazy" alt="Лист с пятью учебными записями студентов из Казани и Тулы и семью столбцами"></a>
+        <a href="../assets/guide-excel/cities-loaded.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/cities-loaded.webp?v=20261124-3" width="855" height="173" loading="lazy" alt="Лист с пятью учебными записями студентов из Казани и Тулы и семью столбцами">
+          </span>
+        </a>
         <figcaption>В примере осталось пять строк. Число строк в вашем варианте зависит от исходных данных.</figcaption>
       </figure>
       <h4>Выборка 3. Работники по должности</h4>
@@ -276,7 +337,14 @@
         <li>Проверьте, что каждая строка соответствует выбранной должности и в результате семь столбцов, включая «Организация». Нажмите «Закрыть и загрузить».</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/position-filter.webp?v=20261124-3"><img src="../assets/guide-excel/position-filter.webp?v=20261124-3" width="438" height="453" loading="lazy" alt="В фильтре столбца «Должность» отмечен только «инженер»"></a>
+        <a href="../assets/guide-excel/position-filter.webp?v=20261124-3">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/position-filter.webp?v=20261124-3" width="438" height="453" loading="lazy" alt="В фильтре столбца «Должность» отмечен только «инженер»">
+            <span class="guide-screenshot-mark" style="--x:92.01%;--y:1.32%;--w:6.62%;--h:6.4%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:12.1%;--y:75.28%;--w:23.97%;--h:7.06%" aria-hidden="true"></span>
+            <span class="guide-screenshot-mark" style="--x:56.62%;--y:88.96%;--w:19.41%;--h:8.17%" aria-hidden="true"></span>
+          </span>
+        </a>
         <figcaption>Оставьте одну должность, указанную в вашем задании.</figcaption>
       </figure>
 
@@ -286,154 +354,34 @@
         <li>Сверьте результаты второго и третьего запросов с исходными таблицами. Если вы исправили данные, нажмите «Данные → Обновить всё» и проверьте результаты ещё раз.</li>
         <li>Сохраните книгу в формате <code>.xlsx</code> в папке своего задания. При переходе в другой кабинет перенесите эту книгу. Источники и результаты хранятся внутри неё.</li>
       </ul>
+
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/all-queries.webp?v=20261124-3"><img src="../assets/guide-excel/all-queries.webp?v=20261124-3" width="444" height="331" loading="lazy" alt="Панель «Запросы и подключения» со списком трёх загруженных запросов"></a>
+        <a href="../assets/guide-excel/queries-command.webp">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/queries-command.webp" width="326" height="101" loading="lazy" alt="Выделена кнопка «Запросы и подключения» на вкладке «Данные»">
+            <span class="guide-screenshot-mark" style="--x:28.22%;--y:39.6%;--w:67.48%;--h:35.64%" aria-hidden="true"></span>
+          </span>
+        </a>
+        <figcaption>На вкладке «Данные» нажмите «Запросы и подключения».</figcaption>
+      </figure>
+      <figure class="guide-screenshot">
+        <a href="../assets/guide-excel/all-queries.webp">
+          <span class="guide-screenshot-frame">
+            <img src="../assets/guide-excel/all-queries.webp" width="444" height="331" loading="lazy" alt="Панель «Запросы и подключения» со списком трёх загруженных запросов">
+          </span>
+        </a>
         <figcaption>В панели «Запросы и подключения» видны все три сохранённые выборки.</figcaption>
       </figure>
     </section>
 
-    <section class="card task-content" id="database-access">
-      <span class="chip">Часть 5 · Варианты 49–58</span>
-      <h2>Создание базы данных в Microsoft Access</h2>
-      <p><a class="btn" href="access-database.docx" download>Скачать методичку по Access · DOCX</a></p>
-      <p><a href="#access-tables">Создание таблиц</a> · <a href="#access-design">Запросы в конструкторе</a> · <a href="#access-wizard">Запросы в мастере</a> · <a href="#access-check">Проверка перед сдачей</a></p>
-      <p>Шифр КИМ 09.01.03-2-2027. Профессия 09.01.03 «Оператор информационных систем и ресурсов».</p>
-      <p>В Microsoft Access создайте файл MDB с таблицами «Студент» и «Работник» и сохраните в нём три запроса. В образце КИМ и в вариантах 49–58 в каждой таблице по 10 записей. Для фильтров используйте города и должность из своего варианта.</p>
-      <h4>Что требуется по КИМ</h4>
-      <ol>
-      <li>Создайте новую базу в офисной СУБД. Создайте и заполните две таблицы по образцу.</li>
-      <li>Сохраните три запроса. Первый выводит телефонную книгу всех студентов. Второй показывает студентов из Москвы или Тулы. Третий выбирает работников с должностью секретаря.</li>
-      <li>Сохраните файл базы в папке на рабочем столе по схеме «Фамилия_№задания». Для задания 2 это, например, «Иванов_2».</li>
-      </ol>
-      <p>Образец приведён в томе 1 КИМ на с. 34–36. Методические рекомендации на с. 2 называют три запроса на выборку. Телефонную книгу также сохраните как запрос.</p>
-      <h4>Работа в Microsoft Access</h4>
-      <p>Запросы можно создать без SQL. Конструктор описан на с. 4, мастер простых запросов — на с. 6.</p>
-      <h4>Какие материалы открыть</h4>
-      <p>В образце КИМ книга «Таблицы_ОЗ.xlsx» находится во вложенном архиве к заданию 2 в папке «БУ». На с. 3 этой методички приведены строки образца. Для вариантов 49–58 берите обе таблицы из своего варианта.</p>
-      <p>В Access формат новой базы по умолчанию обычно ACCDB. Выбор формата Access 2002–2003 создаст настоящий MDB. Переименование расширения оставляет внутренний формат файла прежним.</p>
-      <p><br></p>
-      <h3 id="access-tables">Создание базы и полей в Access</h3>
-      <h4>Получите файл MDB</h4>
-      <ol>
-      <li>Создайте папку «Фамилия_2» на рабочем столе, подставив свою фамилию.</li>
-      <li>В Access откройте «Файл → Параметры → Общие». В разделе создания баз данных найдите формат по умолчанию для пустой базы и выберите Access 2002–2003. Нажмите «ОК».</li>
-      <li>Откройте «Файл → Создать → Пустая база данных». Введите имя «База данных» и через значок папки выберите рабочую папку. Нажмите «Создать». Проверьте расширение в проводнике.</li>
-      <li>Если база уже создана в ACCDB, закройте открытые таблицы и запросы. Через «Файл → Сохранить как → Сохранить базу данных как» выберите «База данных Access 2002–2003». Сохраните копию в рабочую папку и продолжайте в MDB.</li>
-      </ol>
-      <h4>Создайте две таблицы в конструкторе</h4>
-      <ol>
-      <li>Через «Создание → Конструктор таблиц» откройте пустую структуру. Если Access сразу создал пустую «Таблица1», закройте её без сохранения.</li>
-      <li>Заполните имена полей и выберите типы по таблице ниже. Для обоих полей с кодом выберите «Числовой» и в свойствах укажите размер «Длинное целое». Коды 1–10 вы внесёте сами.</li>
-      <li>Выделите строку кода за серый край слева. Нажмите «Ключевое поле» на ленте. Рядом с кодом появится значок ключа. Сохраните таблицу через Ctrl+S и задайте ей точное имя. Повторите для второй таблицы.</li>
-      </ol>
-      <div class="task-table-wrap"><table class="task-table"><thead><tr><th scope="col"><strong>№</strong></th><th scope="col"><strong>Поле в таблице Студент</strong></th><th scope="col"><strong>Поле в таблице Работник</strong></th><th scope="col"><strong>Тип данных Access</strong></th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>Код студента</strong></td><td><strong>Код работника</strong></td><td><strong>Числовой • длинное целое</strong></td></tr><tr><td><strong>2</strong></td><td><strong>Фамилия</strong></td><td><strong>Фамилия</strong></td><td><strong>Короткий текст</strong></td></tr><tr><td><strong>3</strong></td><td><strong>Имя</strong></td><td><strong>Имя</strong></td><td><strong>Короткий текст</strong></td></tr><tr><td><strong>4</strong></td><td><strong>Отчество</strong></td><td><strong>Отчество</strong></td><td><strong>Короткий текст</strong></td></tr><tr><td><strong>5</strong></td><td><strong>Адрес</strong></td><td><strong>Адрес</strong></td><td><strong>Короткий текст</strong></td></tr><tr><td><strong>6</strong></td><td><strong>Номер телефона</strong></td><td><strong>Организация</strong></td><td><strong>Короткий текст</strong></td></tr><tr><td><strong>7</strong></td><td><strong>Профессия</strong></td><td><strong>Должность</strong></td><td><strong>Короткий текст</strong></td></tr></tbody></table></div>
-      <p><strong>Почему телефон хранится как текст.</strong> Телефон служит для набора номера. Короткий текст сохраняет начальный ноль в номере 06291972. Для телефона достаточно длины 20 символов, у остальных текстовых полей можно оставить длину по умолчанию.</p>
-      <p><strong>Как устроены ключи.</strong> Код однозначно определяет запись внутри своей таблицы. Код 1 может встречаться в обеих таблицах. Это разные списки, и для трёх выборок достаточно обращаться к каждой таблице отдельно.</p>
-      <p><br></p>
-      <h3>Заполнение двух таблиц</h3>
-      <h4>Вставьте строки из Excel</h4>
-      <ol>
-      <li>Для образца откройте лист «Студент» в книге «Таблицы_ОЗ.xlsx». Для вариантов 49–58 перенесите свою таблицу «Студент» в Excel. Скопируйте A2:G11, то есть 10 строк без заголовков.</li>
-      <li>В Access откройте таблицу «Студент» в режиме таблицы. Проверьте порядок семи столбцов. Выберите «Главная → Вставить → Добавить записи» (Paste Append) и подтвердите добавление 10 строк. Повторите для листа и таблицы «Работник».</li>
-      <li>Проверьте, что в обеих таблицах по 10 строк с кодами от 1 до 10. В образце КИМ в строке 7 студента Захарова введите 06291972, если из Excel вставилось 6291972. Перейдите на другую строку, чтобы Access сохранил исправление.</li>
-      </ol>
-      <p>Если вставка блоком не сработала, заполните строки вручную. В режиме таблицы вводите значение и нажимайте Tab для перехода вправо. После последнего поля перейдите на следующую строку.</p>
-      <h4>Студент</h4>
-      <div class="task-table-wrap"><table class="task-table"><thead><tr><th scope="col"><strong>Код</strong></th><th scope="col"><strong>Фамилия</strong></th><th scope="col"><strong>Имя</strong></th><th scope="col"><strong>Отчество</strong></th><th scope="col"><strong>Адрес</strong></th><th scope="col"><strong>Телефон</strong></th><th scope="col"><strong>Профессия</strong></th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>Громов</strong></td><td><strong>Лев</strong></td><td><strong>Дмитриевич</strong></td><td><strong>г. Тула</strong></td><td><strong>10123337</strong></td><td><strong>администратор</strong></td></tr><tr><td><strong>2</strong></td><td><strong>Сергеев</strong></td><td><strong>Лев</strong></td><td><strong>Кириллович</strong></td><td><strong>г. Москва</strong></td><td><strong>79954682</strong></td><td><strong>технолог</strong></td></tr><tr><td><strong>3</strong></td><td><strong>Сидорова</strong></td><td><strong>Ульяна</strong></td><td><strong>Даниэльевна</strong></td><td><strong>г. Белев</strong></td><td><strong>36077386</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>4</strong></td><td><strong>Коновалова</strong></td><td><strong>Аделина</strong></td><td><strong>Тимофеевна</strong></td><td><strong>г. Волгоград</strong></td><td><strong>69682364</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>5</strong></td><td><strong>Смирнов</strong></td><td><strong>Павел</strong></td><td><strong>Михайлович</strong></td><td><strong>г. Москва</strong></td><td><strong>31621554</strong></td><td><strong>технолог</strong></td></tr><tr><td><strong>6</strong></td><td><strong>Петров</strong></td><td><strong>Илья</strong></td><td><strong>Робертович</strong></td><td><strong>г. Люберцы</strong></td><td><strong>23539715</strong></td><td><strong>повар</strong></td></tr><tr><td><strong>7</strong></td><td><strong>Захаров</strong></td><td><strong>Сергей</strong></td><td><strong>Егорович</strong></td><td><strong>г. Люберцы</strong></td><td><strong>06291972</strong></td><td><strong>технолог</strong></td></tr><tr><td><strong>8</strong></td><td><strong>Бирюкова</strong></td><td><strong>Владислава</strong></td><td><strong>Артёмовна</strong></td><td><strong>г. Москва</strong></td><td><strong>47636580</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>9</strong></td><td><strong>Крючков</strong></td><td><strong>Максим</strong></td><td><strong>Алексеевич</strong></td><td><strong>г. Волгоград</strong></td><td><strong>62900041</strong></td><td><strong>слесарь</strong></td></tr><tr><td><strong>10</strong></td><td><strong>Николаева</strong></td><td><strong>Елизавета</strong></td><td><strong>Михайловна</strong></td><td><strong>г. Волгоград</strong></td><td><strong>48757127</strong></td><td><strong>повар</strong></td></tr></tbody></table></div>
-      <h4>Работник</h4>
-      <div class="task-table-wrap"><table class="task-table"><thead><tr><th scope="col"><strong>Код</strong></th><th scope="col"><strong>Фамилия</strong></th><th scope="col"><strong>Имя</strong></th><th scope="col"><strong>Отчество</strong></th><th scope="col"><strong>Адрес</strong></th><th scope="col"><strong>Организация</strong></th><th scope="col"><strong>Должность</strong></th></tr></thead><tbody><tr><td><strong>1</strong></td><td><strong>Денисов</strong></td><td><strong>Максим</strong></td><td><strong>Данилович</strong></td><td><strong>г. Липецк</strong></td><td><strong>Машхолдинг</strong></td><td><strong>директор</strong></td></tr><tr><td><strong>2</strong></td><td><strong>Карасева</strong></td><td><strong>Стефания</strong></td><td><strong>Богдановна</strong></td><td><strong>г. Волгоград</strong></td><td><strong>Еврохим</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>3</strong></td><td><strong>Романов</strong></td><td><strong>Лев</strong></td><td><strong>Михайлович</strong></td><td><strong>г. Волгоград</strong></td><td><strong>Евроцемент</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>4</strong></td><td><strong>Смирнова</strong></td><td><strong>Ульяна</strong></td><td><strong>Даниловна</strong></td><td><strong>г. Волгоград</strong></td><td><strong>Северстальтранс</strong></td><td><strong>инженер</strong></td></tr><tr><td><strong>5</strong></td><td><strong>Белкина</strong></td><td><strong>Елизавета</strong></td><td><strong>Лукинична</strong></td><td><strong>г. Люберцы</strong></td><td><strong>Рольф</strong></td><td><strong>секретарь</strong></td></tr><tr><td><strong>6</strong></td><td><strong>Федорова</strong></td><td><strong>Айлин</strong></td><td><strong>Данииловна</strong></td><td><strong>г. Люберцы</strong></td><td><strong>Евросервис</strong></td><td><strong>продавец</strong></td></tr><tr><td><strong>7</strong></td><td><strong>Леонтьева</strong></td><td><strong>Ева</strong></td><td><strong>Давидовна</strong></td><td><strong>г. Москва</strong></td><td><strong>Трансстрой</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>8</strong></td><td><strong>Петрова</strong></td><td><strong>Александра</strong></td><td><strong>Романовна</strong></td><td><strong>г. Москва</strong></td><td><strong>Фосагро</strong></td><td><strong>бухгалтер</strong></td></tr><tr><td><strong>9</strong></td><td><strong>Корнеев</strong></td><td><strong>Роман</strong></td><td><strong>Даниилович</strong></td><td><strong>г. Москва</strong></td><td><strong>Русснефть</strong></td><td><strong>инженер</strong></td></tr><tr><td><strong>10</strong></td><td><strong>Морозов</strong></td><td><strong>Дмитрий</strong></td><td><strong>Денисович</strong></td><td><strong>г. Тула</strong></td><td><strong>Цифроград</strong></td><td><strong>продавец</strong></td></tr></tbody></table></div>
-      <p>Источник строк — образец на с. 35–36 КИМ и книга «Таблицы_ОЗ.xlsx». В базе используйте полные имена полей из схемы на с. 2.</p>
-      <p><br></p>
-      <h3 id="access-design">Три запроса в конструкторе Access</h3>
-      <p>Запрос сохраняет поля и условия отбора. При повторном открытии он строит результат из текущих данных. Для каждого из трёх запросов создавайте отдельный объект.</p>
-      <h4>Как открыть и сохранить запрос</h4>
-      <ol>
-      <li>На вкладке «Создание» выберите «Конструктор запросов». В панели «Добавление таблиц» выберите одну таблицу, указанную ниже, и нажмите «Добавить». Закройте вспомогательную панель, если она мешает.</li>
-      <li>Чтобы добавить поле в нижнюю сетку, дважды щёлкните по нему в списке полей таблицы. Проверьте галочку «Вывод на экран» у нужных столбцов.</li>
-      <li>Введите условие в строку «Условие отбора» под нужным полем. Выполните запрос кнопкой «Выполнить» с красным восклицательным знаком. Чтобы поправить запрос, вернитесь в конструктор через «Вид».</li>
-      <li>Нажмите Ctrl+S. Введите имя запроса. Убедитесь, что оно появилось слева в разделе «Запросы», затем закройте вкладку.</li>
-      </ol>
-      <h4>Запрос 1 Телефонная книга</h4>
-      <ul>
-      <li>Источник — «Студент». Добавьте «Фамилия», «Имя», «Отчество» и «Номер телефона».</li>
-      <li>Оставьте строку условия пустой. Под «Фамилия» выберите сортировку «По возрастанию». Сохраните как «Телефонная книга».</li>
-      <li>Ожидается 10 строк и 4 столбца. Проверьте телефон Захарова с начальным нулём.</li>
-      </ul>
-      <h4>Запрос 2 Студенты из Москвы и Тулы</h4>
-      <ul>
-      <li>Источник — «Студент». Добавьте все семь полей. Для удобной проверки выберите сортировку кода по возрастанию.</li>
-      <li>Под полем «Адрес» в строке «Условие отбора» введите &quot;г. Москва&quot;. Под тем же полем строкой ниже, в строке «Или», введите &quot;г. Тула&quot;. Условия берутся из значений в таблице, включая «г.» и пробел.</li>
-      <li>Сохраните как «Студенты Москва и Тула». По образцу получится четыре записи с кодами 1, 2, 5 и 8.</li>
-      </ul>
-      <h4>Запрос 3 Работники секретари</h4>
-      <ul>
-      <li>Источник — «Работник». Добавьте все семь полей, в том числе «Организация» и «Должность».</li>
-      <li>Под полем «Должность» в строке «Условие отбора» введите &quot;секретарь&quot;. Сохраните как «Работники секретари».</li>
-      <li>По образцу получится одна запись. Код 5, Белкина Елизавета Лукинична, организация «Рольф».</li>
-      </ul>
-      <p><strong>Как убедиться, что запрос сохранён.</strong> Закройте вкладку запроса и снова откройте его двойным щелчком в списке «Запросы». Фильтр, включённый прямо в таблице, отдельного запроса не создаёт.</p>
-      <p><br></p>
-      <h3>Готовые запросы в режиме SQL</h3>
-      <p>Этот способ заменяет создание запросов мышью. Таблицы предварительно должны быть заполнены. Для каждого блока создайте отдельный запрос. Если на экзамене значения в таблицах другие, используйте города и должность из вашего задания.</p>
-      <ol>
-      <li>В Access выберите «Создание → Конструктор запросов». Если появилась панель добавления таблиц, закройте её.</li>
-      <li>В меню «Вид» выберите «Режим SQL». Выделите исходный текст в редакторе и замените его одним блоком ниже. Квадратные скобки относятся к именам, одинарные прямые кавычки — к текстовым значениям.</li>
-      <li>Нажмите «Выполнить». Сверьте результат и нажмите Ctrl+S. Укажите соответствующее имя запроса. Для следующего блока откройте новый конструктор.</li>
-      </ol>
-      <h4>Телефонная книга</h4>
-      <pre class="task-sql"><code>SELECT [Фамилия], [Имя], [Отчество], [Номер телефона]
-      FROM [Студент]
-      ORDER BY [Фамилия], [Имя], [Отчество];</code></pre>
-      <p>Строк по образцу — 10.</p>
-      <h4>Студенты Москва и Тула</h4>
-      <pre class="task-sql"><code>SELECT *
-      FROM [Студент]
-      WHERE [Адрес] IN (&#x27;г. Москва&#x27;, &#x27;г. Тула&#x27;)
-      ORDER BY [Код студента];</code></pre>
-      <p>Строк по образцу — 4.</p>
-      <h4>Работники секретари</h4>
-      <pre class="task-sql"><code>SELECT *
-      FROM [Работник]
-      WHERE [Должность] = &#x27;секретарь&#x27;
-      ORDER BY [Код работника];</code></pre>
-      <p>Строк по образцу — 1.</p>
-      <p><strong>Что проверять в SQL.</strong> SELECT задаёт поля, FROM выбирает таблицу, WHERE отбирает строки, ORDER BY задаёт порядок. Звёздочка выводит все поля таблицы. IN находит строку, если адрес совпадает хотя бы с одним значением в списке.</p>
-      <p>Если открывается окно ввода параметра, проверьте написание имени поля и таблицы. Если запрос работает, но результат пуст, сравните текст в WHERE с фактическими значениями в таблице.</p>
-      <h3 id="access-wizard">Мастер простых запросов в Access</h3>
-      <p>Этот способ удобен, если вы хотите сначала выбрать поля из списка. Мастер создаёт запрос, а условия и сортировку можно задать в его конструкторе. Выполните шаги 1–4 отдельно для каждой выборки.</p>
-      <ol>
-      <li>Откройте «Создание → Мастер запросов». Выберите «Простой запрос» (Simple Query Wizard) и нажмите «ОК».</li>
-      <li>В списке «Таблицы и запросы» выберите нужную таблицу. Двойным щелчком или кнопкой «&gt;» перенесите нужные поля в список выбранных. Чтобы перенести все семь полей сразу, нажмите «&gt;&gt;». Нажмите «Далее».</li>
-      <li>Если мастер предлагает подробный или итоговый запрос, выберите подробный. На последнем экране введите имя запроса, выберите вариант изменения его структуры и нажмите «Готово». Откроется конструктор. Если вы уже открыли результат, щёлкните правой кнопкой по имени запроса слева и выберите «Конструктор».</li>
-      <li>Заполните строки в нижней сетке по инструкции ниже. Нажмите «Выполнить» с красным восклицательным знаком и проверьте результат. Нажмите Ctrl+S, затем закройте вкладку и снова откройте запрос из списка.</li>
-      </ol>
-      <h4>Телефонная книга</h4>
-      <p>Таблица «Студент». Перенесите «Фамилия», «Имя», «Отчество» и «Номер телефона». В конструкторе установите сортировку фамилии по возрастанию. Оставьте отбор пустым. Ожидается 10 строк.</p>
-      <h4>Студенты Москва и Тула</h4>
-      <p>Таблица «Студент». Перенесите все поля кнопкой «&gt;&gt;». В столбце «Адрес» в строке «Условие отбора» введите &quot;г. Москва&quot;, а в строке «Или» ниже — &quot;г. Тула&quot;. При желании отсортируйте код по возрастанию. Ожидается 4 строки с кодами 1, 2, 5 и 8.</p>
-      <h4>Работники секретари</h4>
-      <p>Таблица «Работник». Перенесите все поля. Под «Должность» в строке «Условие отбора» введите &quot;секретарь&quot;. Ожидается 1 строка — Белкина, организация «Рольф».</p>
-      <p>Результат для сдачи — три запроса с указанными именами. Если вы уже сделали их через конструктор, для тренировки с мастером используйте копию базы.</p>
-      <h3 id="access-check">Проверка перед сдачей</h3>
-      <h4>Проверьте файл в рабочей папке</h4>
-      <ol>
-      <li>Закройте Access. Откройте файл MDB из папки «Фамилия_2» на рабочем столе.</li>
-      <li>В разделе таблиц откройте «Студент» и «Работник». По образцу в каждой должно быть по 10 записей. У Захарова в поле «Номер телефона» должно быть 06291972.</li>
-      <li>Откройте три сохранённых запроса. Для образца контрольные количества — 10, 4 и 1. Для других выданных данных сверьте содержание выборок с конкретным условием.</li>
-      <li>Закройте файл и проверьте его имя и расширение в проводнике. Для задания сдайте саму базу с запросами и остальные файлы, перечисленные в выданном задании.</li>
-      </ol>
-      <h4>Типичные ошибки</h4>
-      <div class="task-table-wrap"><table class="task-table"><thead><tr><th scope="col"><strong>Признак</strong></th><th scope="col"><strong>Что проверить</strong></th></tr></thead><tbody><tr><td><strong>В телефоне 7 цифр</strong></td><td><strong>Поле должно быть коротким текстом. Введите 06291972 после смены типа или вставки из Excel.</strong></td></tr><tr><td><strong>Access просит ввести значение параметра</strong></td><td><strong>Сверьте точное имя поля, особенно «Номер телефона», и уберите случайный пробел в заголовке.</strong></td></tr><tr><td><strong>Запрос по городам ничего не показывает</strong></td><td><strong>Сверьте «г. Москва» и «г. Тула» с таблицей. Поставьте значения в разных строках отбора одного столбца через «Или».</strong></td></tr><tr><td><strong>Excel вставил заголовок как запись</strong></td><td><strong>Скопируйте только A2:G11. При повторной вставке проверьте, какие записи уже попали в базу.</strong></td></tr><tr><td><strong>Вместо базы выбран временный файл</strong></td><td>Откройте MDB. Access может создавать рядом временный файл блокировки LDB, пока база открыта.</td></tr></tbody></table></div>
-      <h4>Источники</h4>
-      <p>КИМ 09.01.03-2-2027. Том 1, с. 17 и 34–36. Приложение БУ к заданию 2, книга «Таблицы_ОЗ.xlsx». Методические рекомендации для обучающихся по КИМ 09.01.03-2-2027, с. 2–3.</p>
-      <p><a href="https://support.microsoft.com/en-gb/access/change-the-default-file-format">Microsoft Access  Формат файла базы</a></p>
-      <p><a href="https://support.microsoft.com/en-us/access/create-a-table-and-add-fields">Microsoft Access  Создание таблиц и выбор типов полей</a></p>
-      <p><a href="https://support.microsoft.com/en-us/access/training/video-copy-data-from-excel">Microsoft Access  Копирование записей из Excel</a></p>
-      <p><a href="https://support.microsoft.com/en-us/access/examples-of-query-criteria">Microsoft Access  Условия отбора</a></p>
-      <p><a href="https://support.microsoft.com/en-us/access/create-a-simple-select-query">Microsoft Access  Мастер простых запросов</a></p>
-    </section>
-
     <p><a href="#top">↑ К содержанию</a></p>
   </main>
+  <dialog class="guide-screenshot-dialog" aria-labelledby="screenshot-title">
+    <header>
+      <h2 id="screenshot-title">Снимок из Excel</h2>
+      <form method="dialog"><button class="btn" autofocus>Закрыть</button></form>
+    </header>
+    <div class="guide-screenshot-preview"></div>
+  </dialog>
 </body>
 </html>
