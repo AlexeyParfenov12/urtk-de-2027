@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0f3e45">
   <meta name="description" content="Пошаговые методички по Word, слиянию документов, PowerPoint, мобильному слайдеру и выборкам данных в Excel и Access для практики ДЭ 09.01.03.">
   <title>Методички по выполнению заданий · Практика ДЭ</title>
-  <link rel="stylesheet" href="../styles.css?v=20261124-2">
+  <link rel="stylesheet" href="../styles.css?v=20261124-3">
   <script src="../site-navigation.js?v=20261109-4" defer></script>
 </head>
 <body>
@@ -179,7 +179,7 @@
       <span class="chip">Часть 5 · Варианты 49–58</span>
       <h2>Таблицы и выборки в Microsoft Excel</h2>
       <p>Создайте одну книгу Excel с таблицами «Студент» и «Работник» и сохраните в ней три выборки. Города, должность и записи берите из своего варианта. Для выборок используйте кнопки Power Query на вкладке «Данные».</p>
-      <p>На снимках показана учебная книга с вымышленными записями. Для примера выбраны Казань, Тула и должность «инженер». Нажмите на снимок, чтобы открыть его в полном размере.</p>
+      <p>На снимках показана учебная книга с вымышленными записями. Для примера выбраны Казань, Тула и должность «инженер». На телефоне широкие снимки можно прокрутить вбок. Нажмите на снимок, чтобы открыть его в полном размере.</p>
       <p><a href="#excel-tables">Подготовка таблиц</a> · <a href="#excel-queries">Три выборки</a> · <a href="#excel-check">Проверка перед сдачей</a> · <a href="#database-access">Выполнение в Access</a></p>
 
       <h3 id="excel-tables">1. Подготовьте две таблицы</h3>
@@ -190,11 +190,11 @@
         <li>На листе «Студент» выделите диапазон A1:G11 и нажмите <kbd>Ctrl</kbd> + <kbd>T</kbd>. Проверьте диапазон и поставьте флажок «Таблица с заголовками». Нажмите «ОК». На вкладке «Конструктор таблиц» укажите имя таблицы <code>Студенты</code>. Повторите на листе «Работник» с именем <code>Работники</code>.</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/create-table.webp"><img src="../assets/guide-excel/create-table.webp" width="1107" height="232" loading="lazy" alt="Диалог «Создание таблицы» с диапазоном A1:G11 и включённым флажком заголовков"></a>
+        <a href="../assets/guide-excel/create-table.webp?v=20261124-3"><img src="../assets/guide-excel/create-table.webp?v=20261124-3" width="363" height="202" loading="lazy" alt="Диалог «Создание таблицы» с диапазоном A1:G11 и включённым флажком заголовков"></a>
         <figcaption>После Ctrl + T проверьте диапазон и флажок «Таблица с заголовками».</figcaption>
       </figure>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/table-name.webp"><img src="../assets/guide-excel/table-name.webp" width="1100" height="397" loading="lazy" alt="В левом углу вкладки «Конструктор таблиц» указано имя «Студенты»"></a>
+        <a href="../assets/guide-excel/table-name.webp?v=20261124-3"><img src="../assets/guide-excel/table-name.webp?v=20261124-3" width="627" height="239" loading="lazy" alt="В левом углу вкладки «Конструктор таблиц» указано имя «Студенты»"></a>
         <figcaption>Введите имя таблицы слева на вкладке «Конструктор таблиц» и нажмите Enter.</figcaption>
       </figure>
       <div class="task-table-wrap">
@@ -215,7 +215,7 @@
       <h3 id="excel-queries">2. Соберите три выборки в Power Query</h3>
       <p>Каждую выборку начинайте с исходного листа. Щёлкните любую ячейку внутри его таблицы, откройте «Данные» и нажмите «Из таблицы/диапазона». Команда может находиться внутри меню «Получить данные». Откроется редактор Power Query.</p>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/from-table.webp"><img src="../assets/guide-excel/from-table.webp" width="1105" height="397" loading="lazy" alt="Команда «Из таблицы/диапазона» слева на вкладке «Данные»"></a>
+        <a href="../assets/guide-excel/from-table.webp?v=20261124-3"><img src="../assets/guide-excel/from-table.webp?v=20261124-3" width="842" height="157" loading="lazy" alt="Команда «Из таблицы/диапазона» слева на вкладке «Данные»"></a>
         <figcaption>Команда «Из таблицы/диапазона» открывает исходную таблицу в Power Query.</figcaption>
       </figure>
       <h4>Выборка 1. Телефонная книга</h4>
@@ -235,22 +235,22 @@
         </ol>
         <div class="guide-screenshot-pair">
           <figure class="guide-screenshot">
-            <a href="../assets/guide-excel/type-menu.webp"><img src="../assets/guide-excel/type-menu.webp" width="238" height="314" loading="lazy" alt="Команда «Текст» в списке типов данных на вкладке «Главная»"></a>
+            <a href="../assets/guide-excel/type-menu.webp?v=20261124-3"><img src="../assets/guide-excel/type-menu.webp?v=20261124-3" width="260" height="374" loading="lazy" alt="Команда «Текст» в списке типов данных на вкладке «Главная»"></a>
             <figcaption>Выберите тип «Текст» на ленте.</figcaption>
           </figure>
           <figure class="guide-screenshot">
-            <a href="../assets/guide-excel/replace-type.webp"><img src="../assets/guide-excel/replace-type.webp" width="460" height="202" loading="lazy" alt="Диалог изменения типа столбца с кнопкой «Заменить текущее»"></a>
+            <a href="../assets/guide-excel/replace-type.webp?v=20261124-3"><img src="../assets/guide-excel/replace-type.webp?v=20261124-3" width="579" height="260" loading="lazy" alt="Диалог изменения типа столбца с кнопкой «Заменить текущее»"></a>
             <figcaption>Нажмите «Заменить текущее», чтобы исправить автоматический шаг.</figcaption>
           </figure>
         </div>
       </details>
       <div class="guide-screenshot-pair">
         <figure class="guide-screenshot">
-          <a href="../assets/guide-excel/choose-columns.webp"><img src="../assets/guide-excel/choose-columns.webp" width="347" height="291" loading="lazy" alt="В окне «Выбор столбцов» отмечены фамилия, имя, отчество и номер телефона"></a>
+          <a href="../assets/guide-excel/choose-columns.webp?v=20261124-3"><img src="../assets/guide-excel/choose-columns.webp?v=20261124-3" width="440" height="362" loading="lazy" alt="В окне «Выбор столбцов» отмечены фамилия, имя, отчество и номер телефона"></a>
           <figcaption>Оставьте четыре поля телефонной книги.</figcaption>
         </figure>
         <figure class="guide-screenshot">
-          <a href="../assets/guide-excel/phone-loaded.webp"><img src="../assets/guide-excel/phone-loaded.webp" width="426" height="234" loading="lazy" alt="Загруженный лист с десятью строками телефонной книги и номерами с начальными нулями"></a>
+          <a href="../assets/guide-excel/phone-loaded.webp?v=20261124-3"><img src="../assets/guide-excel/phone-loaded.webp?v=20261124-3" width="488" height="287" loading="lazy" alt="Загруженный лист с десятью строками телефонной книги и номерами с начальными нулями"></a>
           <figcaption>В готовой телефонной книге 10 строк. Первые нули в номерах сохранились.</figcaption>
         </figure>
       </div>
@@ -262,11 +262,11 @@
         <li>Убедитесь, что остались строки из любого из двух выбранных городов и видны все семь столбцов. Нажмите «Закрыть и загрузить».</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/cities-filter.webp"><img src="../assets/guide-excel/cities-filter.webp" width="390" height="360" loading="lazy" alt="В фильтре столбца «Адрес» отмечены Казань и Тула"></a>
+        <a href="../assets/guide-excel/cities-filter.webp?v=20261124-3"><img src="../assets/guide-excel/cities-filter.webp?v=20261124-3" width="440" height="453" loading="lazy" alt="В фильтре столбца «Адрес» отмечены Казань и Тула"></a>
         <figcaption>В учебной книге отмечены «г. Казань» и «г. Тула». В своей книге отметьте два города из задания.</figcaption>
       </figure>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/cities-loaded.webp"><img src="../assets/guide-excel/cities-loaded.webp" width="708" height="144" loading="lazy" alt="Лист с пятью учебными записями студентов из Казани и Тулы и семью столбцами"></a>
+        <a href="../assets/guide-excel/cities-loaded.webp?v=20261124-3"><img src="../assets/guide-excel/cities-loaded.webp?v=20261124-3" width="855" height="173" loading="lazy" alt="Лист с пятью учебными записями студентов из Казани и Тулы и семью столбцами"></a>
         <figcaption>В примере осталось пять строк. Число строк в вашем варианте зависит от исходных данных.</figcaption>
       </figure>
       <h4>Выборка 3. Работники по должности</h4>
@@ -276,7 +276,7 @@
         <li>Проверьте, что каждая строка соответствует выбранной должности и в результате семь столбцов, включая «Организация». Нажмите «Закрыть и загрузить».</li>
       </ol>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/position-filter.webp"><img src="../assets/guide-excel/position-filter.webp" width="358" height="359" loading="lazy" alt="В фильтре столбца «Должность» отмечен только «инженер»"></a>
+        <a href="../assets/guide-excel/position-filter.webp?v=20261124-3"><img src="../assets/guide-excel/position-filter.webp?v=20261124-3" width="438" height="453" loading="lazy" alt="В фильтре столбца «Должность» отмечен только «инженер»"></a>
         <figcaption>Оставьте одну должность, указанную в вашем задании.</figcaption>
       </figure>
 
@@ -287,7 +287,7 @@
         <li>Сохраните книгу в формате <code>.xlsx</code> в папке своего задания. При переходе в другой кабинет перенесите эту книгу. Источники и результаты хранятся внутри неё.</li>
       </ul>
       <figure class="guide-screenshot">
-        <a href="../assets/guide-excel/all-queries.webp"><img src="../assets/guide-excel/all-queries.webp" width="1426" height="432" loading="lazy" alt="В Excel слева результат отбора работников, справа список трёх загруженных запросов"></a>
+        <a href="../assets/guide-excel/all-queries.webp?v=20261124-3"><img src="../assets/guide-excel/all-queries.webp?v=20261124-3" width="444" height="331" loading="lazy" alt="Панель «Запросы и подключения» со списком трёх загруженных запросов"></a>
         <figcaption>В панели «Запросы и подключения» видны все три сохранённые выборки.</figcaption>
       </figure>
     </section>
